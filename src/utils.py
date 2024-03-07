@@ -1,9 +1,11 @@
 import os
 import sys
-from src.exceptions import CustomException
+sys.path.append("d:\Projects\mlproject\src")
+from exceptions import CustomException
 import numpy as np
 import pandas as pd
 import dill
+
 
 
 def save_object(file_path, obj):

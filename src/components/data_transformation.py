@@ -1,4 +1,5 @@
 import sys
+sys.path.append("d:\Projects\mlproject\src")
 import os
 from dataclasses import dataclass
 import numpy as np
@@ -8,9 +9,9 @@ from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
-from src.exceptions import CustomException
-from src.logger import logging
-from src.utils import save_object
+from exceptions import CustomException
+from logger import logging
+from utils import save_object
 
 
 @dataclass
