@@ -26,7 +26,7 @@ class DataTransformation:
         '''This function is responsible for data transformation, based on the
         different types of data.'''
         try:
-            numerical_columns= ["writing_score","reding_score"]
+            numerical_columns= ["writing_score","reading_score"]
             categorical_columns = [
                 "gender",
                 "race_ethnicity",
@@ -38,7 +38,7 @@ class DataTransformation:
             num_pipeline = Pipeline(
                 steps=[
                     ("imputer",SimpleImputer(strategy="median")),
-                    ("scaler", StandardScaler())
+                    ("scaler", StandardScaler(with_mean=False))
                 ]
             )
             logging.info("Numerical columns StandardScaling completed.")
@@ -46,7 +46,7 @@ class DataTransformation:
                 steps=[
                     ("imputer", SimpleImputer(strategy="most_frequent")),
                     ("one_hot_encoder",OneHotEncoder()),
-                    ("standard_scaling", StandardScaler())
+                    ("standard_scaling", StandardScaler(with_mean=False))
                 ]
             )
             logging.info("Categorical columns encoding completed.")
@@ -58,7 +58,7 @@ class DataTransformation:
             )
             return preprocessor
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys)  # type: ignore
         
     def initiate_data_transformation(self, train_path, test_path):
 
@@ -71,7 +71,7 @@ class DataTransformation:
             preprocessing_obj = self.get_data_transformaer_obj()
 
             target_column_name = "math_score" 
-            numerical_columns= ["writing_score","reding_score"]
+            numerical_columns= ["writing_score","reading_score"]
 
             input_feature_train_df = train_df.drop(target_column_name,axis=1)
             target_feature_train_df = train_df[target_column_name]
@@ -101,5 +101,5 @@ class DataTransformation:
 
             )
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) # type: ignore
 

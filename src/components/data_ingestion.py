@@ -1,5 +1,7 @@
 import os
 import sys
+
+from contourpy.util import data
 sys.path.append("d:\Projects\mlproject\src")
 from components import data_transformation
 from exceptions import CustomException
@@ -26,6 +28,7 @@ class DataIngestion:
         try:
             df= pd.read_csv('notebook\data\stud.csv')
             logging.info("Read the dataset as DataFrame.")
+            #print (df.head())
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path), exist_ok= True)
 
@@ -41,11 +44,11 @@ class DataIngestion:
 
             return (self.ingestion_config.train_data_path, self.ingestion_config.test_data_path) 
         except Exception as e:
-            raise CustomException(e,sys)
+            raise CustomException(e,sys) # type: ignore
         
 if __name__ == "__main__":
     obj = DataIngestion()
     train_data,test_data=obj.intiate_data_ingestion()
 
-    data_transformation = DataTransformation()
-    data_transformation.initiate_data_transformation(train_data, test_data)
+    data_transform = DataTransformation()
+    train_arr,test_arr,_=data_transform.initiate_data_transformation(train_data, test_data)
