@@ -2,10 +2,10 @@ import os
 import sys
 
 from contourpy.util import data
-sys.path.append("d:\Projects\mlproject\src")
-from components import data_transformation
-from exceptions import CustomException
-from logger import logging
+#sys.path.append("d:\Projects\mlproject\src")
+from src.components import data_transformation
+from src.exceptions import CustomException
+from src.logger import logging
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass

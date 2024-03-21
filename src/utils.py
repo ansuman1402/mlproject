@@ -1,11 +1,12 @@
 import os
+import pickle
 import sys
+#sys.path.append("D:\Projects\mlproject\src")
 from fontTools.varLib import models
 #from sklearn.base import r2_score
 
 from sklearn.model_selection import train_test_split
-sys.path.append("d:\Projects\mlproject\src")
-from exceptions import CustomException
+from src.exceptions import CustomException
 import numpy as np
 import pandas as pd
 import dill
@@ -45,4 +46,14 @@ def evaluate_model(X_train, y_train, X_test, y_test, models, param):
             return report  
     
     except Exception as e:
-        raise CustomException(sys, e) 
+        raise CustomException(e, sys) 
+    
+    
+  
+def load_object(file_path):
+        try:
+            with open(file_path, "rb") as file_obj:
+                return pickle.load(file_obj)
+            
+        except Exception as e:
+            raise CustomException(e, sys) #type: ignore  
